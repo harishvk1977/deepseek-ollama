@@ -4,7 +4,7 @@
  * Then include it in your HTML: <script src="static/js/chatbot.js"></script>
  * 
  * Requirements: Your Flask app must have a POST endpoint at '/api/chat'
- * that accepts JSON: {"message": "user message"} and returns JSON: {"response": "bot response"}
+ * that accepts JSON: {"query": "user message"} and returns JSON: {"answer": "bot response", "history": [...]}
  */
 
 class Chatbot {
@@ -203,7 +203,7 @@ class Chatbot {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    message: message,
+                    query: message,
                     timestamp: new Date().toISOString(),
                     // You can add more context here if your backend supports it
                     history: this.messageHistory.slice(-5) // Send last 5 messages for context
@@ -221,7 +221,9 @@ class Chatbot {
             
             // Handle different response formats
             let botResponse;
-            if (data.response) {
+            if (data.answer) {
+                botResponse = data.answer;
+            } else if (data.response) {
                 botResponse = data.response;
             } else if (data.message) {
                 botResponse = data.message;
@@ -229,6 +231,12 @@ class Chatbot {
                 botResponse = data.reply;
             } else {
                 botResponse = 'Sorry, I couldn\'t process your request.';
+            }
+            
+            // Handle history from server if provided
+            if (data.history) {
+                console.log('Server provided chat history:', data.history);
+                // You can optionally sync with server history here if needed
             }
             
             this.addMessage(botResponse);

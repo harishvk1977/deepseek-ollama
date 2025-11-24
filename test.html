@@ -1,0 +1,10 @@
+<!-- In <head> section -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot.css') }}">
+
+<!-- Before closing </body> tag -->
+<button class="chatbot-button" onclick="toggleChat()">💬</button>
+<div class="chat-popup" id="chatPopup">
+    <!-- Chat UI content -->
+</div>
+<script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+

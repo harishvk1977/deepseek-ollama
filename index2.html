@@ -1,0 +1,15 @@
+<div class="chat-popup" id="chatPopup">
+    <div class="chat-header">
+        <h3>AI Assistant</h3>
+        <button class="close-chat" onclick="toggleChat()">&times;</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+        <!-- This is where messages appear -->
+    </div>
+    <div class="chat-input-container">
+        <form class="chat-input-form" onsubmit="sendMessage(event)">
+            <input type="text" class="chat-input" id="messageInput" placeholder="Type your message..." required>
+            <button type="submit" class="send-button" id="sendButton">➤</button>
+        </form>
+    </div>
+</div>
